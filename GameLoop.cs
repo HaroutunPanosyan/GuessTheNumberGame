@@ -10,30 +10,30 @@ namespace NumberGuessingGame
     {
         public GameLoop() 
         {
-            int cpuNumber = new Random().Next(1, 101);
+            int numberToGuess = new Random().Next(1, 101);
 
             bool validInput = false;
             int guess;
             do
             {
-                Console.WriteLine(Prompts.InitialPrompt());
+                Console.WriteLine(Prompt.InitialPrompt());
                 string? guessString = Console.ReadLine();
                 validInput = int.TryParse(guessString, out guess);
                 if (!validInput)
                 {
-                    Console.WriteLine(Prompts.Error());
+                    Console.WriteLine(Prompt.Error());
                 }
             } while (!validInput);    
 
-            while (guess != cpuNumber)
+            while (guess != numberToGuess)
             {
-                    Console.WriteLine(Prompts.Loss(guess, cpuNumber));
+                    Console.WriteLine(Prompt.Loss(guess, numberToGuess));
                     guess = Convert.ToInt32(Console.ReadLine());
             }
 
-            Console.WriteLine(Prompts.Win(guess, cpuNumber));
+            Console.WriteLine(Prompt.Win(numberToGuess));
 
-            Console.WriteLine(Prompts.PlayAgain());
+            Console.WriteLine(Prompt.PlayAgain());
             string? response = Console.ReadLine();
             switch (response?.ToLower())
             {
@@ -43,7 +43,7 @@ namespace NumberGuessingGame
                 case "yes":
                     newGame = new GameLoop();
                     break;
-                case "yea":
+                case "yeah":
                     newGame = new GameLoop();
                     break;
                 default:
